@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'amanda’',
   password: 'amanda',
-  database: 'user-chatapp'
+  database: 'chat-endpoint'
 })
 
 module.exports = connection; // export connection

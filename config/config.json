@@ -2,21 +2,21 @@
   "development": {
     "username": "amanda",
     "password": "amanda",
-    "database": "database_development",
+    "database": "chat-endpoint_development",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "amanda",
     "password": "amanda",
-    "database": "database_test",
+    "database": "chat-endpoint_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "amanda",
     "password": "amanda",
-    "database": "database_production",
+    "database": "chat-endpoint_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
