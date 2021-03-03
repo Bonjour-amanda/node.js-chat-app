@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 
-
 class UserController {
 
     constructor() {

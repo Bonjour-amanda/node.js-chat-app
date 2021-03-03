@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   const message = sequelize.define('message', {
     messageTittle: DataTypes.STRING,
