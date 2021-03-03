@@ -56,6 +56,20 @@ class MessageController {
         })
     }
 
+    async update(req, res) {
+        message.update(
+            {where: req.params.id},
+            {messageTittle: req.body.messageTittle}
+        )
+        .then(result => {
+            res.json({
+                status: "succes",
+                data: result,
+                message :"username has been changed"
+            })
+        })
+    }
+
     async delete(req, res) {
         message.destroy({
             where: {
@@ -69,8 +83,6 @@ class MessageController {
             })
         })
     }
-
-    
 
     
 }
