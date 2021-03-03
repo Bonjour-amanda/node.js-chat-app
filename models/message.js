@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     message: DataTypes.TEXT
   }, {});
   message.associate = function(models) {
-    message.belongsTo(model.user, {
-      as: "createdBy",
-      foreignKey: "createdBy",
-    })
+  //   message.belongsTo(model.user, {
+  //     as: "createdBy",
+  //     foreignKey: "createdBy",
+  //   })
   };
   return message;
 };

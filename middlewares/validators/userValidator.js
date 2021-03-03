@@ -47,7 +47,7 @@ module.exports ={
         }
     ],
 
-    sigin: [
+    signin: [
         check('email', 'email field must be email address').normalizeEmail().isEmail()
         .custom(value => {
             return user.findOne({

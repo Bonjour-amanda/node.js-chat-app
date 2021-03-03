@@ -6,7 +6,7 @@ const UserController = require('../controllers/userController');
 const userValidator = require('../middlewares/validators/userValidator');
 
 // SIGNUP
-router.post('/signup', [userValidator.register, function(req, res, next) {
+router.post('/signup', [userValidator.signup, function(req, res, next) {
     passport.authenticate('signup', {
       session: false
     }, function(err, user, info) {
@@ -23,7 +23,7 @@ router.post('/signup', [userValidator.register, function(req, res, next) {
   }]);
 
 //   SIGN IN
-router.post('/signin', [userValidator.login, function(req, res, next) {
+router.post('/signin', [userValidator.signin, function(req, res, next) {
     passport.authenticate('signin', {
       session: false
     }, function(err, user, info) {
