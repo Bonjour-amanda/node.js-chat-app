@@ -40,7 +40,7 @@ router.post('/signin', [userValidator.login, function(req, res, next) {
   }]);
 
 // GET ONE USER
-router.get('/getone', [function(req, res, next) {
+router.get('/getone/:id', [function(req, res, next) {
     passport.authenticate('user', {
       session: false
     }, async function(err, user, info) {
@@ -55,4 +55,13 @@ router.get('/getone', [function(req, res, next) {
       UserController.getOne(user, req, res,next);
     })(req, res, next);
   }]);
-  
+
+// USER UPDATE
+router.patch('/update/:id', [passport.authenticate('user', {
+    session: false
+})], UserController.update)
+
+// USER DELETE
+router.delete('/delete/:id', [passport.authenticate('user', {
+    session: false
+})], UserController.delete)
