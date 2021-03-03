@@ -98,5 +98,19 @@ class UserController {
         })
     }
 
+    async delete(req, res) {
+        user.destroy({
+            where: {
+                id:req.params.id
+            }
+        })
+        .then (result => {
+            res.json({
+                status: 'success',
+                message: "success delete the user"
+            })
+        })
+    }
+
 }
 module.exports = new UserController;
