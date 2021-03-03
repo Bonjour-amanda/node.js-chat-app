@@ -26,7 +26,7 @@ class MessageController {
         })   
     }
 
-    async getOne (req, res) {
+    async getone_message (req, res) {
         message.findOne({
             where :{
                 _id: req.params.id

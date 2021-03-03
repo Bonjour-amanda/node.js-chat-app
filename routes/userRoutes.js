@@ -40,7 +40,7 @@ router.post('/signin', [userValidator.login, function(req, res, next) {
   }]);
 
 // GET ONE USER
-router.get('/getone/:id', [function(req, res, next) {
+router.get('/getone_user/:id', [function(req, res, next) {
     passport.authenticate('user', {
       session: false
     }, async function(err, user, info) {
@@ -65,3 +65,6 @@ router.patch('/update/:id', [passport.authenticate('user', {
 router.delete('/delete/:id', [passport.authenticate('user', {
     session: false
 })], UserController.delete)
+
+// export router
+module.exports = router; 
