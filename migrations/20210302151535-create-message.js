@@ -11,6 +11,9 @@ module.exports = {
       messageTittle: {
         type: Sequelize.STRING
       },
+      message: {
+        type: Sequelize.TEXT
+      },
       createdBy: {
         type: Sequelize.INTEGER,
         allowNull: false,

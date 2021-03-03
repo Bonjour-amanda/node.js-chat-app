@@ -7,9 +7,6 @@ const {
 const {
     user
 } = require('../../models');
-const Op = require('sequelize').Op;
-const path = require('path'); // to detect path of directory
-const crypto = require('crypto'); // to encrypt something
 
 module.exports ={
     signup: [
