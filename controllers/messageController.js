@@ -1,4 +1,5 @@
 const {Message, User} = require("../models")
+const message = require("../models/message")
 
 
 class MessageController {
@@ -11,8 +12,66 @@ class MessageController {
             foreignKey: 'id_message'
         })
     }
-    
+
+    async create(req, res) {
+        message.create({
+            messageTittle: req.body.messageTittle,
+            message: req.body.message
+        })
+        .then(result => {
+            res.json({
+                status: 'success',
+                data: result
+            })
+        })   
+    }
+
+    async getOne (req, res) {
+        message.findOne({
+            where :{
+                _id: req.params.id
+            },
+            attributes: ["id", "messageTittle", "message"]
+        })
+        .then(result => {
+            res.json({
+                status: 'success',
+                data: result
+            })
+        })     
+    }
+
+    async getAll (req, res) {
+        message.findAll({
+            include: [{
+                model: users,
+                as: "createdBy"
+            }]
+        })
+        .then(result => {
+            res.json({
+                status: 'success',
+                data: result
+            })
+        })
+    }
+
+    async delete(req, res) {
+        message.destroy({
+            where: {
+                id:req.params.id
+            }
+        })
+        .then (result => {
+            res.json({
+                status: 'success',
+                message: "success delete the message"
+            })
+        })
+    }
 
     
 
+    
 }
+module.exports = new MessageController;

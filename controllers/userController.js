@@ -1,7 +1,4 @@
-const {
-    User,
-    Message
-} = require("../models")
+const { User, Message } = require("../models")
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -92,3 +89,4 @@ class UserController {
     }
 
 }
+module.exports = new UserController;
