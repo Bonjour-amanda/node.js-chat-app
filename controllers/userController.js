@@ -1,4 +1,4 @@
-const { User, Message } = require("../models")
+const { user, message } = require("../models")
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -8,10 +8,10 @@ class UserController {
 
     // constructor() {
 
-    //     User.hasMany(Message, {
+    //     user.hasMany(message, {
     //         foreignKey: "id_message"
     //     })
-    //     Message.belongsTo(User, {
+    //     message.belongsTo(user, {
     //         foreignKey: "id_message"
     //     })
     // }
@@ -46,7 +46,7 @@ class UserController {
         try {
             const body = {
                 id: dataUser.id,
-                email: dataUser.email,
+                email: dataUser.email
             }
             // create jwt token from body variable
             const token = jwt.sign({
@@ -57,7 +57,7 @@ class UserController {
             res.status(200).json({
                 message: 'Sign in success!',
                 token: token,
-                user_id: user._id
+                user_id: dataUser.id
             })
 
         } catch (e) {
@@ -71,11 +71,12 @@ class UserController {
     async getOne (dataUser, req, res) {
         user.findOne({
             where :{
-                _id: req.params.id
+                id: dataUser.id
             },
             attributes: ["id", "email", "username"]
         })
         .then(result => {
+            // console.log(result)
             res.json({
                 status: 'success',
                 data: result
@@ -83,10 +84,10 @@ class UserController {
         })     
     }
 
-    async update(req, res) {
+    async update(dataUser, req, res) {
         user.update(
-            {where: req.params.id},
-            {username: req.body.username}
+            {username: req.body.username},
+            {where: {id: dataUser.id}}
         )
         .then(result => {
             res.json({

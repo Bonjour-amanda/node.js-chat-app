@@ -31,7 +31,11 @@ class MessageController {
             where :{
                 _id: req.params.id
             },
-            attributes: ["id", "messageTittle", "message"]
+            include: [
+                {
+                    model: db.users,
+                }],
+            attributes: ["id", "senderId", "receiverId", "message"]
         })
         .then(result => {
             res.json({
@@ -45,7 +49,6 @@ class MessageController {
         message.findAll({
             include: [{
                 model: users,
-                as: "createdBy"
             }]
         })
         .then(result => {
@@ -59,7 +62,7 @@ class MessageController {
     async update(req, res) {
         message.update(
             {where: req.params.id},
-            {messageTittle: req.body.messageTittle}
+            {message: req.body.message}
         )
         .then(result => {
             res.json({

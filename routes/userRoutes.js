@@ -6,9 +6,10 @@ const UserController = require('../controllers/userController');
 const userValidator = require('../middlewares/validators/userValidator');
 
 
-router.get('/', (req, res) => {
-    res.send('Hello Express!')
-})
+// router.get('/', (req, res) => {
+//     res.send('Hello Express!')
+// })
+
 // SIGNUP
 router.post('/signup', [userValidator.signup, function(req, res, next) {
     passport.authenticate('signup', {
@@ -31,6 +32,8 @@ router.post('/signin', [userValidator.signin, function(req, res, next) {
     passport.authenticate('signin', {
       session: false
     }, function(err, user, info) {
+      // console.log(user, "user 1")
+      // console.log()
 
       if (!user) {
         res.status(401).json({
@@ -44,7 +47,7 @@ router.post('/signin', [userValidator.signin, function(req, res, next) {
   }]);
 
 // GET ONE USER
-router.get('/getone_user/:id', [function(req, res, next) {
+router.get('/getone_user', [function(req, res, next) {
     passport.authenticate('user', {
       session: false
     }, async function(err, user, info) {
@@ -61,9 +64,21 @@ router.get('/getone_user/:id', [function(req, res, next) {
   }]);
 
 // USER UPDATE
-router.patch('/update/:id', [passport.authenticate('user', {
+router.patch('/update', [function(req, res, next) {
+  passport.authenticate('user', {
     session: false
-})], UserController.update)
+  }, async function(err, user, info) {
+   
+    if (!user) {
+      res.status(401).json({
+        status: 'Error',
+        message: info.message
+      });
+      return;
+    }
+    UserController.update(user, req, res,next);
+  })(req, res, next);
+}]);
 
 // USER DELETE
 router.delete('/delete/:id', [passport.authenticate('user', {

@@ -8,19 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      messageTittle: {
-        type: Sequelize.STRING
-      },
       message: {
         type: Sequelize.TEXT
       },
-      createdBy: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'users',
-          key: 'id'
-        },
+      senderId: {
+        type: Sequelize.INTEGER
+      },
+      receiverId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -14,27 +14,32 @@ passport.use(
             passReqToCallback: true // read other requests
         },
         async (req, email, password, done) => {
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(password, salt);
+
             // Create user data
             user.create({
                 username: req.body.username,
                 email: email, // email get from usernameField (req.body.email)
-                password: password // password get from passwordField (req.body.passport)
-            }).then(result => {
-                // If success, it will return authorization with req.user
-                return done(null, result, {
-                    message: 'User created!'
-                })
-            }).catch(err => {
-                // If error, it will return not authorization
-                return done(null, false, {
-                    message: "User can't be created"
-                })
+                password: hash, // password get from passwordField (req.body.passport)
             })
+                .then((result) => {
+                    // If success, it will return authorization with req.user
+                    return done(null, result, {
+                        message: "User created!",
+                    });
+                })
+                .catch((err) => {
+                    // If error, it will return not authorization
+                    return done(null, false, {
+                        message: "User can't be created",
+                    });
+                });
         },
     )
 );
 
-// If user Sign in
+// If user login
 passport.use(
     'signin',
     new localStrategy({
@@ -44,8 +49,9 @@ passport.use(
         async (email, password, done) => {
             // find user depends on email
             const userSignin = await user.findOne({
-                email: email
-
+                where: {
+                    email: email
+                }
             })
 
             // if user not found
@@ -64,9 +70,10 @@ passport.use(
                     message: 'Wrong password!'
                 })
             }
-            // sign in success
+
+            // login success
             return done(null, userSignin, {
-                message: 'Sign in success!'
+                message: 'signin success!'
             })
         }
     )
@@ -81,12 +88,16 @@ passport.use(
         },
         async (token, done) => {
             // find user depend on token.user.email
+           
             const userSignin = await user.findOne({
-                email: token.user.email
+                where:{
+                    email: token.user.email
+                } 
             })
-
+            
+            // console.log(token, "token")
             // if user.role includes user it will next
-            if (userSignin.role.includes('user')) {
+            if (userSignin) {
                 return done(null, token.user)
             }
 

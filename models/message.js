@@ -5,15 +5,23 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   const message = sequelize.define('message', {
-    messageTittle: DataTypes.STRING,
-    createdBy: DataTypes.INTEGER,
-    message: DataTypes.TEXT
+    message: DataTypes.TEXT,
+    senderId: DataTypes.INTEGER,
+    receiverId: DataTypes.INTEGER
   }, {});
+
   message.associate = function(models) {
-  //   message.belongsTo(model.user, {
-  //     as: "createdBy",
-  //     foreignKey: "createdBy",
-  //   })
+    // message.belongsTo(Model.user, {
+    //   as: "senderId",
+    //   foreignKey: "user.id",
+    //   allowNull: false
+    // })
+    // message.belongsTo(Model.user, {
+    //   as: "receiverId",
+    //   foreignKey: "user.id",
+    //   allowNull: false
+    // })
   };
-  return message;
+  return message
 };
+
