@@ -72,4 +72,23 @@ class UserController {
         }
     }
 
+    async getOne (dataUser, req, res) {
+        user.findOne({
+            where :{
+                _id: req.params.id
+            },
+            attributes: ["id", "email", "username"]
+        })
+        .then(result => {
+            res.json({
+                status: 'success',
+                data: result
+            })
+        })     
+    }
+
+    async update(req, res) {
+   
+    }
+
 }
