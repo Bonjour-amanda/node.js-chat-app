@@ -5,6 +5,10 @@ const auth = require('../middlewares/auth');
 const UserController = require('../controllers/userController');
 const userValidator = require('../middlewares/validators/userValidator');
 
+
+router.get('/', (req, res) => {
+    res.send('Hello Express!')
+})
 // SIGNUP
 router.post('/signup', [userValidator.signup, function(req, res, next) {
     passport.authenticate('signup', {

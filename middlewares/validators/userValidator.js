@@ -6,13 +6,17 @@ const {
 } = require('express-validator'); //form validation & sanitize form params
 const {
     user
-} = require('../../models');
+} = require('../../models/user');
 
 module.exports ={
     signup: [
-        check('username', 'username must be filled with charcters').isString().notEmpty().custom(value => {
+        check('username', 'username must be filled with characters').isString().notEmpty().custom(value => {
+            console.log(value)
             return user.findOne({
-                username: value
+                where: {
+                    username: value
+                  }
+          
             }).then(e => {
                 if (e) {
                     throw new Error('this username has been used, please use another username !');
@@ -21,7 +25,9 @@ module.exports ={
         }),
         check('email', 'email field must be email address ').normalizeEmail().isEmail().custom(value => {
             return user.findOne({
-                email: value
+                where: {
+                    email: value
+                  }
             }).then(e => {
                 if (e) {
                     throw new Error('this email has been used, please use another email !');

@@ -4,11 +4,12 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors') //Enable cors request
 
-app.use(cors())
-
 // Import Routes
+const routes = require('./routes')
 const userRoutes = require('./routes/userRoutes.js')
 const messageRoutes = require('./routes/messageRoutes.js')
+
+app.use(cors())
 
 // Parsing the body of incoming requests
 app.use(bodyParser.json())
@@ -19,6 +20,10 @@ app.use(express.static('public'))
 
 
 // Connect the routes with
+app.get('/', (req, res) => {
+    res.send('Hello Express!')
+})
+
 app.use('/user', userRoutes);
 app.use('/message', messageRoutes);
 
