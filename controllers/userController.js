@@ -85,7 +85,17 @@ class UserController {
     }
 
     async update(req, res) {
-   
+        user.update(
+            {where: req.params.id},
+            {username: req.body.username}
+        )
+        .then(result => {
+            res.json({
+                status: "succes",
+                data: result,
+                message :"username has been changed"
+            })
+        })
     }
 
 }
