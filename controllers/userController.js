@@ -1,13 +1,17 @@
-const models = require("../models/user")
+const {
+    User,
+    Message
+} = require("../models")
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 
 
 class UserController {
 
     constructor() {
-        
+
         User.hasMany(Message, {
             foreignKey: "id_message"
         })
@@ -17,7 +21,7 @@ class UserController {
     }
 
     async signUp(dataUser, req, res) {
-        try{
+        try {
             const body = {
                 id: dataUser.id,
                 email: dataUser.email,
@@ -34,21 +38,38 @@ class UserController {
                 message: "Register success!",
                 token: token,
             })
-        }catch(e){
+        } catch (e) {
             return res.status(401).json({
-                    status: "Error!",
-                    message: "register failed"
-                  })
+                status: "Error!",
+                message: "register failed"
+            })
         }
     }
 
     async signIn(dataUser, req, res) {
-        try{
-            
-        }catch(e){
+        try {
+            const body = {
+                id: dataUser.id,
+                email: dataUser.email,
+            }
+            // create jwt token from body variable
+            const token = jwt.sign({
+                user: body
+            }, 'secret_password')
 
+            // success to create token
+            res.status(200).json({
+                message: 'Sign in success!',
+                token: token,
+                user_id: user._id
+            })
+
+        } catch (e) {
+            return res.status(401).json({
+                status: "Error!",
+                message: "signin failed"
+            })
         }
     }
-
 
 }

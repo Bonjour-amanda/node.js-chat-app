@@ -1,6 +1,5 @@
-const models = require("../models/message")
-const Message = models.message
-const User = models.user
+const {Message, User} = require("../models")
+
 
 class MessageController {
 
