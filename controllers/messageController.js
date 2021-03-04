@@ -15,7 +15,6 @@ class MessageController {
 
     async create(req, res) {
         message.create({
-            messageTittle: req.body.messageTittle,
             message: req.body.message
         })
         .then(result => {
