@@ -6,11 +6,26 @@ const {
 module.exports = (sequelize, DataTypes) => {
   const message = sequelize.define('message', {
     message: DataTypes.TEXT,
-    senderId: DataTypes.INTEGER,
-    receiverId: DataTypes.INTEGER
+    senderId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      references: {
+        model: 'user',
+        key: 'id',
+        as: 'senderId',
+      }
+    },
+    receiverId: {
+      type : DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id',
+        as: 'senderId',
+      }
+    }
   }, {});
 
-  message.associate = function(models) {
+  message.associate = function (models) {
     // message.belongsTo(Model.user, {
     //   as: "senderId",
     //   foreignKey: "user.id",
@@ -24,4 +39,3 @@ module.exports = (sequelize, DataTypes) => {
   };
   return message
 };
-

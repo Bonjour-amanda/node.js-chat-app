@@ -17,13 +17,13 @@ router.get('/', passport.authenticate('user', {
 }),MessageController.getAll) 
 
 // GET ONE
-router.get('/getone_message', passport.authenticate('user', {
+router.get('/getone_message/:id', passport.authenticate('user', {
     session: false
 }), MessageController.getone_message)
 
 
 // UPDATE
-router.patch('/update/:id_message', [passport.authenticate('user', {
+router.patch('/update/:id', [passport.authenticate('user', {
     session: false
 })], MessageController.update)
 
