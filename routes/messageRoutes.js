@@ -5,6 +5,12 @@ const auth = require('../middlewares/auth');
 const MessageController = require('../controllers/messageController');
 // const MessageValidator = require("../middlewares/validator/messageValidator")
 
+
+// CREATE 
+router.post('/create', [passport.authenticate('user', {
+    session: false
+})], MessageController.create)
+
 // GET ALL
 router.get('/', passport.authenticate('user', {
     session: false
@@ -14,11 +20,6 @@ router.get('/', passport.authenticate('user', {
 router.get('/getone_message', passport.authenticate('user', {
     session: false
 }), MessageController.getone_message)
-
-// CREATE 
-router.post('/create', [passport.authenticate('user', {
-    session: false
-})], MessageController.create)
 
 
 // UPDATE
