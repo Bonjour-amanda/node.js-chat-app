@@ -96,12 +96,10 @@ passport.use(
             })
             
             // console.log(token, "token")
-            // if user.role includes user it will next
             if (userSignin) {
                 return done(null, token.user)
             }
 
-            // if user.role not includes user it will not authorization
             return done(null, false)
         }
     )

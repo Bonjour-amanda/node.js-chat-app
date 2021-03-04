@@ -1,5 +1,5 @@
-const {Message, User} = require("../models")
-const message = require("../models/message")
+const {message, user} = require("../models")
+// const message = require("../models/message")
 
 
 class MessageController {
@@ -15,7 +15,7 @@ class MessageController {
 
     async create(req, res) {
         message.create({
-            message: req.body.message
+            message: req.body.message,
         })
         .then(result => {
             res.json({
@@ -48,6 +48,8 @@ class MessageController {
         message.findAll({
             include: [{
                 model: users,
+                senderId: dataUser.id,
+                receiverId: dataUser.id
             }]
         })
         .then(result => {
