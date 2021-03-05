@@ -8,11 +8,8 @@ const {
 class MessageController {
 
     // constructor() {
-    //     User.hasMany(Message, {
-    //         foreignKey: "id_user"
-    //     })
-    //     Message.belongsTo(User, {
-    //         foreignKey: 'id_message'
+    //     message.belongsToMany(user, {
+    //         foreignKey: 'message.id'
     //     })
     // }
 
@@ -34,7 +31,7 @@ class MessageController {
                     _id: req.params.id
                 },
                 include: [{
-                    model: db.users,
+                    model: db.user,
                 }],
                 attributes: ["id", "senderId", "receiverId", "message"]
             })
@@ -49,9 +46,9 @@ class MessageController {
     async getAll(req, res) {
         message.findAll({
                 include: [{
-                    model: users,
-                    senderId: dataUser.id,
-                    receiverId: dataUser.id
+                    model: user,
+                    senderId: user.id,
+                    receiverId: user.id
                 }]
             })
             .then(result => {

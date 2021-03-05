@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             user.hasMany(models.message, {
-                onDElete: 'CASCADE',
+                onDelete: 'CASCADE',
                 foreignKey: 'senderId'
             });
             user.hasMany(models.message, {
