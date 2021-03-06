@@ -6,12 +6,12 @@ const bcrypt = require('bcrypt');
 
 class UserController {
 
-    constructor() {
+    // constructor() {
 
-        user.hasMany(message, {
-            foreignKey: "message.id"
-        })
-    }
+    //     user.hasMany(message, {
+    //         foreignKey: "message.id"
+    //     })
+    // }
 
     async signUp(dataUser, req, res) {
         try {

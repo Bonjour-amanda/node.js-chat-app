@@ -13,20 +13,18 @@ module.exports = {
       },
       senderId: {
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'user',
+        references:{
+          model: 'users',
           key: 'id',
-          as: 'senderId',
+          as: 'senderId'
         }
       },
       receiverId: {
         type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'user',
+        references:{
+          model: 'users',
           key: 'id',
-          as: 'reiverId',
+          as: 'reiverId'
         }
       },
       createdAt: {

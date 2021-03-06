@@ -13,80 +13,123 @@ class MessageController {
     //     })
     // }
 
-    async create(req, res) {
-        message.create({
+    // SEND CHAT (SEND MESSAGE)
+    async sendMessage(req, res) {
+        try {
+            const results = message.create({
                 message: req.body.message,
+                senderId: req.user.id,
+                receiverId: req.params.id
             })
-            .then(result => {
+            res.io.emit('message', {
+                receiver: req.params.id,
+                sender: req.user.id,
+                results
+            })
+            res.json(results => {
                 res.json({
                     status: 'success',
-                    data: result
+                    data: results
                 })
             })
+        } catch (e) {
+            return res.status(401).json({
+                status: "Error!",
+                message: "fail sending message"
+            })
+
+        }
     }
 
-    async getone_message(req, res) {
-        message.findOne({
-                where: {
-                    _id: req.params.id
-                },
-                include: [{
-                    model: db.user,
-                }],
-                attributes: ["id", "senderId", "receiverId", "message"]
-            })
-            .then(result => {
-                res.json({
-                    status: 'success',
-                    data: result
-                })
-            })
-    }
-
-    async getAll(req, res) {
+    // SHOW CHAT (SHOW ALL MESSAGE)
+    async getAllMessage(req, res) {
         message.findAll({
-                include: [{
-                    model: user,
-                    senderId: user.id,
-                    receiverId: user.id
-                }]
-            })
-            .then(result => {
-                res.json({
-                    status: 'success',
-                    data: result
-                })
-            })
-    }
-
-    async update(req, res) {
-        message.update({
-                where: req.params.id
-            }, {
-                message: req.body.message
-            })
-            .then(result => {
-                res.json({
-                    status: "succes",
-                    data: result,
-                    message: "username has been changed"
-                })
-            })
-    }
-
-    async delete(req, res) {
-        message.destroy({
                 where: {
-                    id: req.params.id
+                    id: {
+                        [req.Op.notIn]: [req.user.id]
+                    }
                 }
             })
             .then(result => {
                 res.json({
                     status: 'success',
-                    message: "success delete the message"
+                    data: result
                 })
             })
     }
+
+    // async create(req, res) {
+    //     message.create({
+    //             message: req.body.message,
+    //         })
+    //         .then(result => {
+    //             res.json({
+    //                 status: 'success',
+    //                 data: result
+    //             })
+    //         })
+    // }
+
+    // async getone_message(req, res) {
+    //     message.findOne({
+    //             where: {
+    //                 _id: req.params.id
+    //             },
+    //             include: [{
+    //                 model: db.user,
+    //             }],
+    //             attributes: ["id", "senderId", "receiverId", "message"]
+    //         })
+    //         .then(result => {
+    //             res.json({
+    //                 status: 'success',
+    //                 data: result
+    //             })
+    //         })
+    // }
+
+    // async getAll(req, res) {
+    //     message.findAll({
+    //             where: {
+    //                 id: {[req.Op.notIn]: [req.userData.id]}
+    //             }
+    //         })
+    //         .then(result => {
+    //             res.json({
+    //                 status: 'success',
+    //                 data: result
+    //             })
+    //         })
+    // }
+
+    // async update(req, res) {
+    //     message.update({
+    //             where: req.params.id
+    //         }, {
+    //             message: req.body.message
+    //         })
+    //         .then(result => {
+    //             res.json({
+    //                 status: "success",
+    //                 data: result,
+    //                 message: "username has been changed"
+    //             })
+    //         })
+    // }
+
+    // async delete(req, res) {
+    //     message.destroy({
+    //             where: {
+    //                 id: req.params.id
+    //             }
+    //         })
+    //         .then(result => {
+    //             res.json({
+    //                 status: 'success',
+    //                 message: "success delete the message"
+    //             })
+    //         })
+    // }
 
 
 }

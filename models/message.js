@@ -2,40 +2,34 @@
 const {
   Model
 } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
-  const message = sequelize.define('message', {
-    message: DataTypes.TEXT,
-    senderId: {
-      type: DataTypes.INTEGER,
-      onDelete: 'CASCADE',
-      references: {
-        model: 'user',
-        key: 'id',
-        as: 'senderId',
-      }
-    },
-    receiverId: {
-      type : DataTypes.INTEGER,
-      references: {
-        model: 'user',
-        key: 'id',
-        as: 'senderId',
+  class message extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      message.associate = function(models) {
+          message.belongsTo(models.user,{
+            onDelete: 'CASCADE',
+            foreignKey:'senderId'
+          }),
+          message.belongsTo(models.user,{
+            onDelete: 'CASCADE',
+            foreignKey:'receiverId'
+          })
       }
     }
-  }, {});
-
-  message.associate = function (models) {
-    // message.belongsTo(Model.user, {
-    //   as: "senderId",
-    //   foreignKey: "user.id",
-    //   allowNull: false
-    // })
-    // message.belongsTo(Model.user, {
-    //   as: "receiverId",
-    //   foreignKey: "user.id",
-    //   allowNull: false
-    // })
   };
-  return message
+  message.init({
+    message: DataTypes.TEXT,
+    senderId: DataTypes.INTEGER,
+    receiverId: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'message',
+  });
+  return message;
 };
