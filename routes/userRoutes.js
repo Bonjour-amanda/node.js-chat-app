@@ -6,10 +6,6 @@ const UserController = require('../controllers/userController');
 const userValidator = require('../middlewares/validators/userValidator');
 
 
-// router.get('/', (req, res) => {
-//     res.send('Hello Express!')
-// })
-
 // SIGNUP
 router.post('/signup', [userValidator.signup, function(req, res, next) {
     passport.authenticate('signup', {
@@ -32,9 +28,6 @@ router.post('/signin', [userValidator.signin, function(req, res, next) {
     passport.authenticate('signin', {
       session: false
     }, function(err, user, info) {
-      // console.log(user, "user 1")
-      // console.log()
-
       if (!user) {
         res.status(401).json({
           status: 'Error',
@@ -87,3 +80,15 @@ router.delete('/delete/:id', [passport.authenticate('user', {
 
 // export router
 module.exports = router; 
+
+
+
+/* just for debugging purpose (ignore this):
+// router.get('/', (req, res) => {
+//     res.send('Hello Express!')
+// })
+
+
+// console.log(user, "user 1")
+// console.log()
+*/

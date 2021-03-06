@@ -5,7 +5,6 @@ const auth = require('../middlewares/auth');
 const MessageController = require('../controllers/messageController');
 // const MessageValidator = require("../middlewares/validator/messageValidator")
 
-
 // SEND MESSAGE
 router.post('/sendMessage/:id', [passport.authenticate('user', {
         session: false
