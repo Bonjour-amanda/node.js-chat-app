@@ -32,13 +32,13 @@ router.get('/getone_message/:id', passport.authenticate('user', {
 }), MessageController.getone_message)
 
 
-// UPDATE
-// router.patch('/update/:id', [passport.authenticate('user', {
-//     session: false
-// })], MessageController.update)
+// UPDATE MESSAGE USING MESSAGE ID
+router.patch('/update/:id', [passport.authenticate('user', {
+    session: false
+})], MessageController.update)
 
 // DELETE
-// router.delete('/delete/:id_message', [passport.authenticate('user', {
+// router.delete('/delete/:id', [passport.authenticate('user', {
 //     session: false
 // })], MessageController.delete)
 

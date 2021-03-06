@@ -53,7 +53,7 @@ class MessageController {
             })
     }
 
-
+// GET ONE MESSAGE BY MESSAGE ID
     async getone_message(req, res) {
         message.findOne({
                 where: {
@@ -67,22 +67,21 @@ class MessageController {
                 })
             })
     }
-
-    // async update(req, res) {
-    //     message.update({
-    //             where: req.params.id
-    //         }, {
-    //             message: req.body.message
-    //         })
-    //         .then(result => {
-    //             res.json({
-    //                 status: "success",
-    //                 data: result,
-    //                 message: "username has been changed"
-    //             })
-    //         })
-    // }
-
+// UPDATE MESSAGE BY MESSAGE ID
+    async update(req, res) {
+        message.update(
+            { message: req.body.message },
+            { where: { id: req.params.id } }
+          )
+        .then(result => {
+                res.json({
+                    status: "success",
+                    data: result,
+                    message: "message has been edited"
+                })
+            })
+    }
+// DELETE MESSAGE BY MESSAGE ID
     // async delete(req, res) {
     //     message.destroy({
     //             where: {
