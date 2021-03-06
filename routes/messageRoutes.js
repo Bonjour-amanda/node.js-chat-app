@@ -26,10 +26,10 @@ router.get('/showMessage', passport.authenticate('user', {
 //     session: false
 // }),MessageController.getAll) 
 
-// GET ONE
-// router.get('/getone_message/:id', passport.authenticate('user', {
-//     session: false
-// }), MessageController.getone_message)
+// GET ONE MESSAGE ACCORDING TO MESSAGE ID
+router.get('/getone_message/:id', passport.authenticate('user', {
+    session: false
+}), MessageController.getone_message)
 
 
 // UPDATE

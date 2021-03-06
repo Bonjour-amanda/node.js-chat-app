@@ -7,13 +7,7 @@ const {
 
 class MessageController {
 
-    // constructor() {
-    //     message.belongsToMany(user, {
-    //         foreignKey: 'message.id'
-    //     })
-    // }
-
-    // SEND CHAT (SEND MESSAGE)
+// SEND CHAT (SEND MESSAGE)
     async sendMessage(req, res) {
         try {
             const results = message.create({
@@ -42,7 +36,7 @@ class MessageController {
         }
     }
 
-    // SHOW CHAT (SHOW ALL MESSAGE)
+// SHOW CHAT (SHOW ALL MESSAGE)
     async getAllMessage(req, res) {
         message.findAll({
                 where: {
@@ -59,49 +53,20 @@ class MessageController {
             })
     }
 
-    // async create(req, res) {
-    //     message.create({
-    //             message: req.body.message,
-    //         })
-    //         .then(result => {
-    //             res.json({
-    //                 status: 'success',
-    //                 data: result
-    //             })
-    //         })
-    // }
 
-    // async getone_message(req, res) {
-    //     message.findOne({
-    //             where: {
-    //                 _id: req.params.id
-    //             },
-    //             include: [{
-    //                 model: db.user,
-    //             }],
-    //             attributes: ["id", "senderId", "receiverId", "message"]
-    //         })
-    //         .then(result => {
-    //             res.json({
-    //                 status: 'success',
-    //                 data: result
-    //             })
-    //         })
-    // }
-
-    // async getAll(req, res) {
-    //     message.findAll({
-    //             where: {
-    //                 id: {[req.Op.notIn]: [req.userData.id]}
-    //             }
-    //         })
-    //         .then(result => {
-    //             res.json({
-    //                 status: 'success',
-    //                 data: result
-    //             })
-    //         })
-    // }
+    async getone_message(req, res) {
+        message.findOne({
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(result => {
+                res.json({
+                    status: 'success',
+                    data: result
+                })
+            })
+    }
 
     // async update(req, res) {
     //     message.update({
