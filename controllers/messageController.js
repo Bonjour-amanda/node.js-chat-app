@@ -20,17 +20,18 @@ class MessageController {
                 message: req.body.message,
                 senderId: req.user.id,
                 receiverId: req.params.id
+            })   
+            .then(result => {
+                res.json({
+                    status: 'success',
+                    data: result,
+                    message: "message has been send"
+                })
             })
             res.io.emit('message', {
                 receiver: req.params.id,
                 sender: req.user.id,
                 results
-            })
-            res.json(results => {
-                res.json({
-                    status: 'success',
-                    data: results
-                })
             })
         } catch (e) {
             return res.status(401).json({
