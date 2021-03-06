@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 
 class UserController {
 
-
+// USER SIGNUP
     async signUp(dataUser, req, res) {
         try {
             const body = {
@@ -33,6 +33,7 @@ class UserController {
         }
     }
 
+// USER SIGNIN
     async signIn(dataUser, req, res) {
         try {
             const body = {
@@ -59,6 +60,7 @@ class UserController {
         }
     }
 
+// USER GET THEIR OWN DATA (PROFILE)
     async getOne (dataUser, req, res) {
         user.findOne({
             where :{
@@ -73,8 +75,9 @@ class UserController {
                 data: result
             })
         })     
-    }
 
+    }
+// UPDATE DATA USER
     async update(dataUser, req, res) {
         user.update(
             {username: req.body.username},
@@ -89,6 +92,7 @@ class UserController {
         })
     }
 
+// DELETE USER
     async delete(req, res) {
         user.destroy({
             where: {

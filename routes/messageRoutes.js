@@ -38,9 +38,9 @@ router.patch('/update/:id', [passport.authenticate('user', {
 })], MessageController.update)
 
 // DELETE
-// router.delete('/delete/:id', [passport.authenticate('user', {
-//     session: false
-// })], MessageController.delete)
+router.delete('/delete/:id', [passport.authenticate('user', {
+    session: false
+})], MessageController.delete)
 
 
 // export router

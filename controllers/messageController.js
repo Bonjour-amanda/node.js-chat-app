@@ -82,19 +82,19 @@ class MessageController {
             })
     }
 // DELETE MESSAGE BY MESSAGE ID
-    // async delete(req, res) {
-    //     message.destroy({
-    //             where: {
-    //                 id: req.params.id
-    //             }
-    //         })
-    //         .then(result => {
-    //             res.json({
-    //                 status: 'success',
-    //                 message: "success delete the message"
-    //             })
-    //         })
-    // }
+    async delete(req, res) {
+        message.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(result => {
+                res.json({
+                    status: 'success',
+                    message: "success delete the message"
+                })
+            })
+    }
 
 
 }
