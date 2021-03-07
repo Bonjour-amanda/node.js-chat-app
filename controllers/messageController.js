@@ -38,13 +38,14 @@ class MessageController {
 
 // SHOW CHAT (SHOW ALL MESSAGE)
     async getAllMessage(req, res) {
+        // console.log(req, "req")
+        // console.log(req.Op.notIn)
         message.findAll({
                 where: {
-                    id: {
-                        [req.Op.notIn]: [req.user.id]
-                    }
+                    senderId: req.user.id
                 }
             })
+            
             .then(result => {
                 res.json({
                     status: 'success',
