@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "nodemon -r ./index.js",
-    "dev": "nodemon -r ./index.js",
-    "start": "nodemon index.js"
+    "dev": "nodemon -r ./index.js"
   },
   "author": "amanda",
   "license": "ISC",
