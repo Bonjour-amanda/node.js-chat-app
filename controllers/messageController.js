@@ -4,6 +4,9 @@ const {
 } = require("../models")
 // const message = require("../models/message")
 
+const Sequelize = require('sequelize')
+const Op  = Sequelize.Op
+
 
 class MessageController {
 
@@ -42,10 +45,12 @@ class MessageController {
         // console.log(req.Op.notIn)
         message.findAll({
                 where: {
-                    senderId: req.user.id
+                    [Op.or]: [
+                        { senderId: req.user.id },
+                        { receiverId: req.user.id }
+                      ]
                 }
             })
-            
             .then(result => {
                 res.json({
                     status: 'success',
