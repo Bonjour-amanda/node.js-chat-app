@@ -41,8 +41,6 @@ class MessageController {
 
 // SHOW CHAT (SHOW ALL MESSAGE)
     async getAllMessage(req, res) {
-        // console.log(req, "req")
-        // console.log(req.Op.notIn)
         message.findAll({
                 where: {
                     [Op.or]: [
