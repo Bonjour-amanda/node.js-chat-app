@@ -1,5 +1,9 @@
 # node.js-chat-app
 
+To run the API:
+steps : 1. type "npm run dev" in terminal
+        2. open postman and login, and then run it in localhost:3000
+
 1. User can send a message to another user.
 steps : 1. user need to sign-up or sign-in (using localhost:3000/user/signup or localhost:3000/user/signin) 
         2. user can send a message (using localhost:3000/message/sendMessage/:id (another user id)). 
