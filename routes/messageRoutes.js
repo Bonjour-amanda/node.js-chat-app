@@ -10,7 +10,7 @@ router.post('/sendMessage/:id', [passport.authenticate('user', {
         session: false
     })], MessageController.sendMessage)
 
-// SHOW MESSAGE (GET ALL MESSAGE)
+// SHOW MESSAGE (GET ALL MESSAGE) => user can only see the message that they send or they receive
 router.get('/showMessage', passport.authenticate('user', {
     session: false
 }),MessageController.getAllMessage) 
