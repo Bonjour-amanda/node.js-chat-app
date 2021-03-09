@@ -6,6 +6,10 @@ const cors = require('cors') //Enable cors request
 const Sequelize = require('sequelize')
 const socket = require('socket.io')
 
+// require('dotenv').config({
+//     path: `.env.${process.env.NODE_ENV}`
+//   })
+
 // Import Routes
 const route = require('./routes')
 const userRoutes = require('./routes/userRoutes.js')
@@ -42,4 +46,4 @@ app.use('/message', messageRoutes);
 // Listen to port 3000 
 app.listen(3000,()=> console.log("server running on http://localhost:3000")); 
 
-// module.exports = app
+module.exports = app
